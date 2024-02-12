@@ -381,7 +381,6 @@ def plot_histogram(df):
 def get_node_counts(df):
     all_nodes_detractors = [string for sublist in df["Flows"] for string in sublist]
     return Counter(all_nodes_detractors)
-    print("nodes counts: ", node_counts)
 
 
 def main():
