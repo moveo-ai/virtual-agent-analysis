@@ -8,7 +8,7 @@ black = "==19.10b0"
 
 [packages]
 python-graphql-client = "==0.4.3"
-requests = "==2.25.1"
+requests = "==2.31.0"
 structlog = "==19.2.0"
 tqdm = "*"
 joblib = "*"
