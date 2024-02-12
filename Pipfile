@@ -1,0 +1,18 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+black = "==19.10b0"
+
+[packages]
+python-graphql-client = "==0.4.3"
+requests = "==2.25.1"
+structlog = "==19.2.0"
+tqdm = "*"
+joblib = "*"
+tenacity = "*"
+pandas = "*"
+seaborn = "==0.11.2"
+plotly = "*"
