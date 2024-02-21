@@ -43,5 +43,3 @@ Analyze the behavior and performance of Moveo.AI virtual agents.
 ## Used for creating the graphs
 
 https://plotly.com/python/
-
-See examples in [/data/example_plots](https://github.com/moveo-ai/virtual-agent-analysis/tree/main/data/example_plots)
