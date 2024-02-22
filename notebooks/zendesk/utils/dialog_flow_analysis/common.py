@@ -31,7 +31,7 @@ RATING_MAX = int(os.environ.get("RATING_MAX", 10))
 SESSION_NOT_FOUND = "No session_id"
 SESSION_ID_LEN = 36
 
-DATA_DIR = Path(__file__).resolve().parent.parent.parent.parent.parent / "data"
+DATA_DIR = Path(__file__).resolve().parents[4] / "data"
 
 
 def load_data_from_csv(csv_fname: str, **kwargs) -> pd.DataFrame:
