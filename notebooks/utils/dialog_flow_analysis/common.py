@@ -33,10 +33,6 @@ SESSION_ID_LEN = 36
 
 DATA_DIR = Path(__file__).resolve().parent.parent.parent.parent / "data"
 
-# Set the threshold for the minimum number of transitions (dialog turns) to be
-# displayed in the Sankey diagrams
-MIN_TRANSITIONS_DISPLAY_THRESHOLD = 3
-
 
 def load_data_from_csv(csv_fname: str, **kwargs) -> pd.DataFrame:
     """
@@ -215,7 +211,7 @@ def analyze_agents(content_csv_fname: str):
     return df
 
 
-def analyze_flows(content_csv_fname: str):
+def analyze_flows(content_csv_fname: str, min_transitions_displayed=3):
     """
     Analyze flows from a CSV file containing session data.
 
@@ -287,17 +283,20 @@ def analyze_flows(content_csv_fname: str):
         title="Detractors Journey Flow "
         f"(Ratings: {RATING_MIN}-{DETRACTORS_UPPER_LIMIT})",
         fname=content_csv_fname,
+        top_k=min_transitions_displayed,
     )
     create_sankey(
         promoters,
         title=f"Promoters Journey Flow (Ratings: {PROMOTERS_LOWER_LIMIT}-{RATING_MAX})",
         fname=content_csv_fname,
+        top_k=min_transitions_displayed,
     )
     create_sankey(
         neutral,
         title="Neutrals Journey Flow (Ratings: "
         f"{DETRACTORS_UPPER_LIMIT + 1}-{PROMOTERS_LOWER_LIMIT - 1})",
         fname=content_csv_fname,
+        top_k=min_transitions_displayed,
     )
     # Generate the ratings histogram
     plot_ratings_histogram(
@@ -332,7 +331,12 @@ def analyze_flows(content_csv_fname: str):
 
 
 # NOTE: top_k should be adjusted to get better results depending on the ammount of data.
-def create_sankey(df: pd.DataFrame, title: str, fname: str = None, top_k=3):
+def create_sankey(
+    df: pd.DataFrame,
+    title: str,
+    fname: str = None,
+    top_k=3,
+):
     """
     Create a Sankey diagram from a DataFrame.
 
@@ -344,7 +348,7 @@ def create_sankey(df: pd.DataFrame, title: str, fname: str = None, top_k=3):
         title (str): Title of the Sankey diagram.
         top_k (int, optional): Min number of transitions to include.
                 Defaults to 3. For a large ammount of data,
-                increase it in order to clarify the diagrams.
+                increase it in order to get readable diagrams.
 
     Returns:
         None
@@ -388,7 +392,7 @@ def create_sankey(df: pd.DataFrame, title: str, fname: str = None, top_k=3):
     values = []
 
     for (source, target), count in transition_counts.items():
-        if count >= MIN_TRANSITIONS_DISPLAY_THRESHOLD:
+        if count >= top_k:
             sources.append(state_to_index[source])
             targets.append(state_to_index[target])
             values.append(count)
