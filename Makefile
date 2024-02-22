@@ -19,14 +19,14 @@ install:
 	pipenv install
 
 lint:
-	pipenv run flake8 notebooks/utils
+	pipenv run flake8 notebooks
 	pipenv run pylint --rcfile=.pylintrc notebooks
 	pipenv run nbqa flake8 notebooks
 	pipenv run nbqa pylint --rcfile=.pylintrc notebooks
 
 format:
-	pipenv run black notebooks/utils
-	pipenv run isort --atomic notebooks/utils
+	pipenv run black notebooks
+	pipenv run isort --atomic notebooks
 	pipenv run nbqa black notebooks
 	pipenv run nbqa isort --atomic notebooks
 
