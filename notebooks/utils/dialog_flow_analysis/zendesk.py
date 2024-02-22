@@ -231,7 +231,7 @@ def split_agents_and_brain_tickets(csv_fname: str, brain_name: str):
             len(df_virtual_assistant) + len(df_agents) + len(df_no_agent)
         )
         if total_rows_output_files == len(df):
-            logger.info("Total rows in output files match total rows in input file.")
+            logger.debug("Total rows in output files match total rows in input file.")
         else:
             logger.warning(
                 "Total rows in output files do not match total rows in input file."

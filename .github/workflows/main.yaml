@@ -24,12 +24,6 @@ jobs:
       - name: Install dependencies
         run: make install-dev
 
-      - name: Install nbstripout
-        run: pip install nbstripout
-
-      - name: Remove notebook outputs
-        run: nbstripout --install
-
       - name: Run formatting
         run: make format
 

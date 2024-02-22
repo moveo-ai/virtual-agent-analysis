@@ -43,3 +43,19 @@ Analyze the behavior and performance of Moveo.AI virtual agents.
 ## Used for creating the graphs
 
 https://plotly.com/python/
+
+## Contributing
+
+### To ensure that your commits [exclude any notebook outputs](https://gist.github.com/33eyes/431e3d432f73371509d176d0dfb95b6e) while contributing to the project, execute the following command within your terminal, in the project's root directory:
+
+```bash
+git config filter.strip-notebook-output.clean 'jupyter nbconvert --ClearOutputPreprocessor.enabled=True --to=notebook --stdin --stdout --log-level=ERROR'
+```
+
+### The project uses a Makefile.
+
+To see all the available commands:
+
+```bash
+make help
+```
