@@ -31,7 +31,7 @@ RATING_MAX = int(os.environ.get("RATING_MAX", 10))
 SESSION_NOT_FOUND = "No session_id"
 SESSION_ID_LEN = 36
 
-DATA_DIR = Path(__file__).resolve().parent.parent.parent.parent / "data"
+DATA_DIR = Path(__file__).resolve().parent.parent.parent.parent.parent / "data"
 
 
 def load_data_from_csv(csv_fname: str, **kwargs) -> pd.DataFrame:
@@ -355,9 +355,16 @@ def create_sankey(
     """
     flows = df["Flows"]
     transitions: List[Tuple[str, str]] = []
-    for journey in flows:
+    for session_id, journey in zip(df["SessionID"], flows):
         for i in range(len(journey) - 1):
-            transitions.append((journey[i], journey[i + 1]))
+            transition = (journey[i], journey[i + 1])
+            transitions.append(transition)
+            # Print the session_ids of a specific dialog transition
+            if transition == (
+                "From Dialog",
+                "To Dialog",
+            ):
+                logger.info(f"Session ID for transition {transition}: {session_id}")
 
     # Count transition occurrences
     transition_counts = Counter(transitions)
