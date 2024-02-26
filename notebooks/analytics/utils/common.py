@@ -33,8 +33,10 @@ def execute_query(client: GraphqlClient, query: str, variables: Dict) -> list:
 
     Args:
         client (GraphqlClient): GraphQL client
-        query (str): The GraphQL query. More information: https://docs.moveo.ai/docs/analytics/api_overview
-        variables (dict): A dictionary with key = variable name of the query and value = the variable value
+        query (str): The GraphQL query. More information:
+            https://docs.moveo.ai/docs/analytics/api_overview
+        variables (dict): A dictionary with key = variable name of the query
+            and value = the variable value
 
     Returns:
         list: List of logs retrieved from the API.
@@ -47,7 +49,7 @@ def execute_query(client: GraphqlClient, query: str, variables: Dict) -> list:
         )
     except requests.exceptions.HTTPError as e:
         if e.response.status_code == 404:
-            logger.warning(f"Received a 404 from the GrapgQL API", variables=variables)
+            logger.warning("Received a 404 from the GrapgQL API", variables=variables)
             return []
         logger.error(
             f"Could not fetch content from the GraphQL API. Got error: {str(e)}",
@@ -75,7 +77,8 @@ def execute_query(client: GraphqlClient, query: str, variables: Dict) -> list:
 
 def serialize_list_variable(string_list: List[str]) -> str:
     """
-    Returns a serialized version of the input list of strings to be passed as GraphQL variables
+    Returns a serialized version of the input list of strings to be passed
+    as GraphQL variables
     Args:
         string_list (List[str]): the input strings
     Returns:
@@ -83,5 +86,6 @@ def serialize_list_variable(string_list: List[str]) -> str:
     """
     # Format each string in the list to be double-quoted
     formatted_strings = [f'"{s}"' for s in string_list]
-    # Join the formatted strings with a comma and space, and enclose them in curly braces
+    # Join the formatted strings with a comma and space
+    # and enclose them in curly braces
     return "{" + ", ".join(formatted_strings) + "}"

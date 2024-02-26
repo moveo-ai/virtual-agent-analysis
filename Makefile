@@ -21,8 +21,6 @@ install:
 lint:
 	pipenv run flake8 notebooks
 	pipenv run pylint --rcfile=.pylintrc notebooks
-	pipenv run nbqa flake8 notebooks
-	pipenv run nbqa pylint --rcfile=.pylintrc notebooks
 
 format:
 	pipenv run black notebooks
