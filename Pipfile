@@ -20,8 +20,8 @@ tenacity = "==8.2.3"
 pandas = "==2.2.0"
 seaborn = "==0.11.2"
 plotly = "==5.18.0"
-jupyterlab = "== 4.1.2"
-
+jupyterlab = "==4.1.2"
+appnope = "==0.1.4"
 
 [requires]
 python_version = "3.10"
