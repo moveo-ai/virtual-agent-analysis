@@ -84,31 +84,41 @@ def fetch_data_analytics_api(session_id: str, account_id: str, api_key: str) -> 
     )
 
     query = """
-            query SessionContentV2($sessionId: String) {
-                rows: log_session_content_v2(args: { session_id: $sessionId }) {
-                    messages
+            query GetSessionContent($sessionId: String!) {
+                get_session_content(args: { session_id: $sessionId }) {
+                    account_id
                     brain_id
                     brain_parent_id
-                    avg_confidence
                     brain_version
                     channel
                     channel_user_id
+                    csat_brain
+                    csat_human_agent
                     desk_id
                     end_time
+                    expired_time
                     external_user_id
+                    feedback
+                    goal_achieved
+                    insights
                     integration_id
                     is_contained
                     is_covered
                     is_test
-                    min_confidence
+                    messages
                     participated_agents
+                    participated_brains
+                    participated_collections
                     rating
+                    rule_ids
                     session_id
                     start_time
                     tags
                     total_user_messages
+                    user_email
                     user_id
                     user_name
+                    user_sentiment
                 }
             }
         """
